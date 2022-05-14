@@ -6,7 +6,7 @@ const SearchScreen = ({ navigation }) => {
   const [text, setText] = useState("");
 
   return (
-    <View style={styles.viewStyle}>
+    <View style={styles.searchScreenContainerStyle}>
       <Text style={styles.title}>Dictionary</Text>
       <SearchBar
         setNewText={(changedText) => {
@@ -21,11 +21,16 @@ const SearchScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  searchScreenContainerStyle: {
+   
+    flex: 1,
+    justifyContent: "center",
+  },
   title: {
-    marginLeft: 15,
-
+    fontSize: 48,
     fontWeight: "bold",
-    fontSize: 44,
+    marginLeft: 15,
+    fontFamily: 'serif'
   },
 });
 

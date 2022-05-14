@@ -22,9 +22,10 @@ const styles = StyleSheet.create({
         
         height: 50,
         backgroundColor: "#e0e0e0",
-        margin: 15,
         borderRadius: 4,
         flexDirection: 'row',
+        marginLeft:15,
+        marginTop:15,
     },
     icon:{
         alignSelf:'center',
@@ -35,6 +36,8 @@ const styles = StyleSheet.create({
     input:{
         flex: 1,
         marginLeft:10,
+        fontSize:16,
+        fontFamily:'serif'
     }
 })
 export default SearchBar;

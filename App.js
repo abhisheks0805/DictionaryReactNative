@@ -7,7 +7,6 @@ import ResultScreen from "./src/screens/ResultScreen";
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  
   return (
     <NavigationContainer>
       <Stack.Navigator>
