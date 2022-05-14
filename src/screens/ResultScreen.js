@@ -1,70 +1,63 @@
 import React, { useEffect, useState } from "react";
 import { Text, View, StyleSheet, FlatList, ScrollView } from "react-native";
+import useResults from "../hooks/useResults";
 
-const ResultScreen = ({ navigation, route }) => {
-  const [meanings, setMeanings] = useState([]);
+const ResultScreen = ({route }) => {
   const text = route.params.text;
-  const URL = `https://api.dictionaryapi.dev/api/v2/entries/en/${text}`;
-
-  const fetchData = async () => {
-    try {
-      const response = await fetch(URL);
-      const parsedResponse = await response.json();
-      setMeanings(parsedResponse[0].meanings[0]);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  const [data, fetchData] = useResults();
 
   useEffect(() => {
-    fetchData();
+    fetchData(text);
   }, []);
 
+  console.log(data);
+
+  if (data.length == 0) {
+    return null;
+  }
   return (
     <>
-      <ScrollView>
-        <Text style={styles.title}>{text}</Text>
-        <Text>{}</Text>
-        <Text style={styles.subHeading}>DEFINITIONS:</Text>
+      <Text style={styles.title}>{text}</Text>
+      <Text>{data.phonetics[0].text}</Text>
+      <Text style={styles.subHeading}>DEFINITIONS:</Text>
+      <FlatList
+        data={data.meanings[0].definitions}
+        renderItem={({ item, index }) => {
+          return (
+            <Text>
+              {index + 1}. {item.definition}
+              {"\n"}
+            </Text>
+          );
+        }}
+      />
+
+      <View style={styles.antoSynViewStyle}>
+        <Text style>SYNONYMS:</Text>
         <FlatList
-          data={meanings.definitions}
+          data={data.meanings[0].synonyms}
           renderItem={({ item, index }) => {
             return (
               <Text>
-                {index + 1}. {item.definition}
+                {index + 1}. {item}
                 {"\n"}
               </Text>
             );
           }}
         />
-
-        <View style={styles.antoSynViewStyle}>
-          <Text style>SYNONYMS:</Text>
-          <FlatList
-            data={meanings.synonyms}
-            renderItem={({ item, index }) => {
-              return (
-                <Text>
-                  {index + 1}. {item}
-                  {"\n"}
-                </Text>
-              );
-            }}
-          />
-          <Text>ANTONYMS:</Text>
-          <FlatList
-            data={meanings.antonyms}
-            renderItem={({ item, index }) => {
-              return (
-                <Text>
-                  {index + 1}. {item}
-                  {"\n"}
-                </Text>
-              );
-            }}
-          />
-        </View>
-      </ScrollView>
+        <Text>ANTONYMS:</Text>
+        <FlatList
+          data={data.meanings[0].antonyms}
+          renderItem={({ item, index }) => {
+            return (
+              <Text>
+                {index + 1}. {item}
+                {"\n"}
+              </Text>
+            );
+          }}
+        />
+      </View>
     </>
   );
 };
