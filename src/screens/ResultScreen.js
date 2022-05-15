@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, StyleSheet, Image, ScrollView } from "react-native";
+import { Text, View, StyleSheet, Image, ScrollView,ActivityIndicator } from "react-native";
 import useResults from "../hooks/useResults";
 
 const ResultScreen = ({ route }) => {
@@ -16,7 +16,7 @@ const ResultScreen = ({ route }) => {
   console.log(loading);
   return (
     <View style={styles.container}>
-      <ScrollView>
+      {loading?(<View style={styles.loadingContainer}><ActivityIndicator size={"large"}/></View>):(<ScrollView>
         <Text style={styles.titleStyle}>{text}</Text>
         <Text style={styles.phoneticsStyle}>{data.phonetics[0].text}</Text>
         <Text style={styles.subHeading}>DEFINITIONS:</Text>
@@ -58,7 +58,9 @@ const ResultScreen = ({ route }) => {
             })}
           </View>
         </View>
-      </ScrollView>
+      </ScrollView>)}
+      
+      
     </View>
   );
 };
@@ -93,5 +95,14 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     marginRight: 55,
   },
+  loadingContainer:{
+    
+    minHeight:"100%",
+    minWidth:"100%",
+    display: "flex",
+    flex: 1,
+    justifyContent:"center",
+    alignItems:"center",
+  }
 });
 export default ResultScreen;
