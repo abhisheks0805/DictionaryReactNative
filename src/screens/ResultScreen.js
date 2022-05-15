@@ -13,12 +13,14 @@ const ResultScreen = ({ route }) => {
   if (data.length == 0) {
     return null;
   }
+  
   console.log(loading);
   return (
     <View style={styles.container}>
-      {loading?(<View style={styles.loadingContainer}><ActivityIndicator size={"large"}/></View>):(<ScrollView>
+      {loading?(<View style={styles.loadingContainer}><ActivityIndicator size={"large"}/></View>):(<ScrollView style={{minWidth:"100%"}}>
         <Text style={styles.titleStyle}>{text}</Text>
-        <Text style={styles.phoneticsStyle}>{data.phonetics[0].text}</Text>
+        
+        <Text style={styles.phoneticsStyle}>{!data.phonetics.length==0?data.phonetics[0].text:null}</Text>
         <Text style={styles.subHeading}>DEFINITIONS:</Text>
         {data.meanings[0].definitions.map((element, index) => {
           return (
@@ -67,7 +69,6 @@ const ResultScreen = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     marginTop: 32,
-
     flex: 1,
     flexWrap: "wrap",
   },

@@ -22,7 +22,6 @@ const SearchScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   searchScreenContainerStyle: {
-   
     flex: 1,
     justifyContent: "center",
   },
@@ -30,7 +29,7 @@ const styles = StyleSheet.create({
     fontSize: 48,
     fontWeight: "bold",
     marginLeft: 15,
-    fontFamily: 'serif'
+    fontFamily: "serif",
   },
 });
 

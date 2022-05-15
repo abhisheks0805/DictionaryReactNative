@@ -4,7 +4,6 @@ import { useToast } from "react-native-toast-notifications";
 export default () => {
   const [data, setData] = useState([]);
   const [loading,setLoading] = useState(true)
-  const [noDataFound,setNoDataFound] = useState("")
   const toast = useToast();
 
   const fetchData = async (text) => {
